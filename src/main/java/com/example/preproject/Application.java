@@ -34,16 +34,15 @@ public class Application {
         headers.setContentType(MediaType.APPLICATION_JSON);
         User user = new User(3L, "James", "Brown", (byte) 10);
         User newUser = new User(3L, "Thomas", "Shelby", (byte) 10);
-        HttpEntity<User>request = new HttpEntity<>(user, headers);
         addUser(user, headers);
         updateUser(newUser, headers);
         deleteUser(3,headers);
     }
+
     private static void deleteUser(int id, HttpHeaders httpHeaders) {
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL+"/" +id, HttpMethod.DELETE, new HttpEntity<>(id, httpHeaders), String.class);
         System.out.println(responseEntity.getBody());
     }
-
 
     private static void updateUser(User user, HttpHeaders httpHeaders) {
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.PUT, new HttpEntity<>(user, httpHeaders), String.class);
@@ -54,8 +53,6 @@ public class Application {
         ResponseEntity<String> responseEntity = restTemplate.exchange(URL, HttpMethod.POST, new HttpEntity<>(user, httpHeaders), String.class);
         System.out.println(responseEntity.getBody());
     }
-
-
 }
 
 
